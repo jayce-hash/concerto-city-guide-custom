@@ -87,6 +87,14 @@ function toRad(deg) {
 function displayResults(results, status) {
   const resultsContainer = document.getElementById('results');
   resultsContainer.innerHTML = '';
+
+  const instruction = document.createElement('p');
+  instruction.textContent = 'Tap a place to open it in Google Maps';
+  instruction.style.fontSize = '14px';
+  instruction.style.color = '#5e6b86';
+  instruction.style.marginBottom = '12px';
+  resultsContainer.appendChild(instruction);
+
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     results.forEach(place => {
       const placeLat = place.geometry.location.lat();
