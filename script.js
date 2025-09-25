@@ -1,4 +1,4 @@
-
+// ========== FILTERS + VENUE SETUP ==========
 const restaurantFilters = [
   { label: 'Sit-Down Dining', type: 'restaurant' },
   { label: 'Fast Food', type: 'meal_takeaway' },
@@ -25,6 +25,7 @@ let lng = parseFloat(new URLSearchParams(window.location.search).get('lng'));
 let venue = new URLSearchParams(window.location.search).get('venue');
 document.getElementById('venue-name').innerText = decodeURIComponent(venue).toUpperCase();
 
+// ========== GOOGLE MAPS FILTER FUNCTIONS ==========
 function showRestaurantFilters() {
   const filterBox = document.getElementById('restaurant-filters');
   filterBox.innerHTML = '';
@@ -68,17 +69,19 @@ function getPlaces({ type, keyword = '' }) {
   service.nearbySearch(request, displayResults);
 }
 
-
-function calculateDistance(lat1, lon1, lat2, lon2) {
-  const R = 3958.8; // Radius of Earth in miles
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2);
+function calculateDistance(lat1, lng1, lat2, lng2) {
+  const R = 3958.8;
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+            Math.sin(dLng / 2) * Math.sin(dLng / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
+}
+
+function toRad(deg) {
+  return deg * (Math.PI / 180);
 }
 
 function displayResults(results, status) {
@@ -115,23 +118,57 @@ function displayResults(results, status) {
   }
 }
 
-function calculateDistance(lat1, lng1, lat2, lng2) {
-  const R = 3958.8; // miles
-  const dLat = toRad(lat2 - lat1);
-  const dLng = toRad(lng2 - lng1);
-  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-            Math.sin(dLng / 2) * Math.sin(dLng / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c;
-}
-
-function toRad(deg) {
-  return deg * (Math.PI / 180);
-}
-
 function searchCustom() {
   const keyword = document.getElementById('customSearch').value.trim();
   if (!keyword) return;
   getPlaces({ type: 'restaurant', keyword });
+}
+
+// ========== APPLE MAPS TOP PICKS ==========
+const topPicksData = {
+  "Kia Forum": [
+    { name: "Cork & Batter", link: "https://maps.apple/p/G~Wcuuge~5__.j", description: "Rooftop bar with American fare & cocktails near the Forum." },
+    { name: "Coni’s Seafood", link: "https://maps.apple.com/place?address=3544%20W%20Imperial%20Hwy,%20Inglewood,%20CA%20%2090303,%20United%20States&coordinate=33.930767,-118.334890&name=Coni'Seafood&place-id=I3DFBAF4BC6FA9193&map=explore", description: "Traditional Nayarit-style seafood & Mexican eats." },
+    { name: "Dulan’s Soul Food Kitchen", link: "https://maps.apple/p/t0RwbR5XPKSR0e", description: "Comforting Southern soul food served in a casual spot." },
+    { name: "Sunday Gravy", link: "https://maps.apple/p/9T256TaTrfC3uR", description: "Italian & Mediterranean comfort food with local charm." },
+    { name: "Stuff I Eat", link: "https://maps.apple/p/-61WLERdW7nmM1", description: "Wholesome vegan soul food in downtown Inglewood." }
+  ],
+  "Sphere Las Vegas": [
+    { name: "Via Via Food Hall at The Venetian", link: "https://maps.apple/p/6kA-kqku59dAhN", description: "Trendy indoor food court with global bites & drinks." },
+    { name: "Estiatorio Milos", link: "https://maps.apple/p/dYDRqQUT.bbLvS", description: "Elegant Mediterranean seafood spot inside The Venetian." },
+    { name: "Yardbird", link: "https://maps.apple.com/place?address=3355%20S%20Las%20Vegas%20Blvd,%20Las%20Vegas,%20NV%20%2089109,%20United%20States&coordinate=36.122465,-115.169064&name=Yardbird%20Table%20%26%20Bar&place-id=I6CD6F71ED0195A69&map=explore", description: "Southern comfort classics & craft cocktails." },
+    { name: "SUSHISAMBA", link: "https://maps.apple.com/place?address=3327%20S%20Las%20Vegas%20Blvd,%20Las%20Vegas,%20NV%20%2089109,%20United%20States&coordinate=36.124533,-115.167752&name=SUSHISAMBA&place-id=IF4D59BEAF61684A7&map=explore", description: "Lively spot for Japanese-Brazilian-Peruvian fusion sushi." },
+    { name: "CHICA", link: "https://maps.apple.com/place?address=3355%20S%20Las%20Vegas%20Blvd,%20Unit%20106,%20Las%20Vegas,%20NV%2089109,%20United%20States&coordinate=36.122475,-115.169252&name=CHICA&place-id=ICD92A203ECBBFC90&map=explore", description: "Upscale Latin American flavors with Vegas flair." }
+  ],
+  "Madison Square Garden": [
+    { name: "Bar Primi", link: "https://maps.apple.com/place?address=349%20W%2033rd%20St,%20New%20York,%20NY%20%2010001,%20United%20States&coordinate=40.752609,-73.996211&name=Bar%20Primi&place-id=I88A1A0B80763F65B&map=explore", description: "Modern Italian pastas & wines in a stylish corner spot." },
+    { name: "Roberta’s", link: "https://maps.apple.com/place?address=234%20W%2034th%20St,%20New%20York,%20NY%20%2010119,%20United%20States&coordinate=40.751139,-73.991500&name=Roberta's&place-id=IFEE5ADD8C999FFF2&map=explore", description: "Brooklyn-famous wood-fired pizza near the Garden." },
+    { name: "Los Tacos No. 1", link: "https://maps.apple.com/place?address=201%20W%2033rd%20St%0ANew%20York,%20NY%2010001%0AUnited%20States&coordinate=40.750606,-73.991386&name=Los%20Tacos%20No.%201&place-id=IB263E6B78B0D112E&map=explore", description: "Top-tier Tijuana-style tacos made fresh to order." },
+    { name: "Sea", link: "https://maps.apple.com/place?address=151%20W%2030th%20St,%20New%20York,%20NY%20%2010001,%20United%20States&coordinate=40.748449,-73.991809&name=SEA&place-id=IBBE05296D10383D9&map=explore", description: "Trendy Thai eatery with modern interiors & full bar." },
+    { name: "The Dynamo Room", link: "https://maps.apple.com/place?address=2%20Penn%20Plaza,%20New%20York,%20NY%20%2010121,%20United%20States&coordinate=40.749973,-73.992193&name=The%20Dynamo%20Room&place-id=I5679ADC317A53F59&map=explore", description: "Buzzy Penn District hangout with burgers & cocktails." }
+  ]
+};
+
+function loadTopPicks() {
+  const resultsContainer = document.getElementById('results');
+  resultsContainer.innerHTML = '';
+
+  const picks = topPicksData[decodeURIComponent(venue)];
+  if (!picks) {
+    resultsContainer.innerHTML = '<p>No top picks for this venue yet.</p>';
+    return;
+  }
+
+  picks.forEach(place => {
+    const card = document.createElement('a');
+    card.href = place.link;
+    card.className = 'place-card';
+    card.target = '_blank';
+    card.innerHTML = `
+      <h3>${place.name}</h3>
+      <p>${place.description}</p>
+      <p style="font-size:13px; color:#5e6b86;">Tap to open in Apple Maps</p>
+    `;
+    resultsContainer.appendChild(card);
+  });
 }
