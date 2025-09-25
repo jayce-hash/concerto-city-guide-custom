@@ -153,6 +153,10 @@ function loadTopPicks() {
   const resultsContainer = document.getElementById('results');
   resultsContainer.innerHTML = '';
 
+  // Hide restaurant filters if showing
+  const filterBox = document.getElementById('restaurant-filters');
+  filterBox.style.display = 'none';
+
   const picks = topPicksData[decodeURIComponent(venue)];
   if (!picks) {
     resultsContainer.innerHTML = '<p>No top picks for this venue yet.</p>';
@@ -164,9 +168,17 @@ function loadTopPicks() {
     card.href = place.link;
     card.className = 'place-card';
     card.target = '_blank';
+
+    // Try to parse Apple Maps coordinate from the link
+    const match = place.link.match(/coordinate=([\d.-]+),([\d.-]+)/);
+    const placeLat = match ? parseFloat(match[1]) : null;
+    const placeLng = match ? parseFloat(match[2]) : null;
+    const distance = (placeLat && placeLng) ? calculateDistance(lat, lng, placeLat, placeLng) : null;
+
     card.innerHTML = `
       <h3>${place.name}</h3>
       <p>${place.description}</p>
+      ${distance ? `<p>${distance.toFixed(1)} miles from the venue</p>` : ''}
       <p style="font-size:13px; color:#5e6b86;">Tap to open in Apple Maps</p>
     `;
     resultsContainer.appendChild(card);
