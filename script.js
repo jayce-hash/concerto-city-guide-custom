@@ -128,7 +128,7 @@ function searchCustom() {
 const topPicksData = {
   "Kia Forum": [
     { name: "Cork & Batter", link: "https://maps.apple/p/G~Wcuuge~5__.j", description: "Rooftop bar with American fare & cocktails near the Forum." },
-    { name: "Coni’s Seafood", link: "https://maps.apple.com/place?address=3544%20W%20Imperial%20Hwy,%20Inglewood,%20CA%20%2090303,%20United%20States&coordinate=33.930767,-118.334890&name=Coni'Seafood&place-id=I3DFBAF4BC6FA9193&map=explore", description: "Traditional Nayarit-style seafood & Mexican eats." },
+    { name: "Coni’Seafood", link: "https://maps.apple.com/place?address=3544%20W%20Imperial%20Hwy,%20Inglewood,%20CA%20%2090303,%20United%20States&coordinate=33.930767,-118.334890&name=Coni'Seafood&place-id=I3DFBAF4BC6FA9193&map=explore", description: "Traditional Nayarit-style seafood & Mexican eats." },
     { name: "Dulan’s Soul Food Kitchen", link: "https://maps.apple/p/t0RwbR5XPKSR0e", description: "Comforting Southern soul food served in a casual spot." },
     { name: "Sunday Gravy", link: "https://maps.apple/p/9T256TaTrfC3uR", description: "Italian & Mediterranean comfort food with local charm." },
     { name: "Stuff I Eat", link: "https://maps.apple/p/-61WLERdW7nmM1", description: "Wholesome vegan soul food in downtown Inglewood." }
