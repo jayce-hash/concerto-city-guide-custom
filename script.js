@@ -92,6 +92,7 @@ const instruction = document.createElement('p');
 instruction.textContent = 'Select a place below to learn more';
 instruction.style.fontSize = '14px';
 instruction.style.color = '#5e6b86';
+instruction.style.marginTop = '10px';
 instruction.style.marginBottom = '12px';
 instruction.style.textAlign = 'center';
 resultsContainer.appendChild(instruction);
