@@ -44,8 +44,10 @@
   </button>
 </div>
 
-<!-- Grid Buttons (centered in flex container) -->
-<div style="display: flex; justify-content: center;">
+<!-- Wrapper for buttons and filters -->
+<div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+
+  <!-- Category buttons -->
   <div class="button-grid" style="max-width: 700px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;">
     <button onclick="loadCategory('restaurant')" style="width: 48%;">Restaurants</button>
     <button onclick="loadCategory('lodging')" style="width: 48%;">Hotels</button>
@@ -58,23 +60,24 @@
     <button onclick="loadCategory('gas_station')" style="width: 48%;">Gas Stations</button>
     <button onclick="loadCategory('supermarket')" style="width: 48%;">Grocery Stores</button>
   </div>
-</div>
 
-    <!-- Dropdown Filter (centered and spaced like buttons) -->
-<div id="filter-container" style="display: none; justify-content: center; margin-top: 4px; margin-bottom: 12px;">
-  <select id="restaurant-filters" class="dropdown" onchange="triggerFilteredSearch()" style="
-    font-size: 14px;
-    padding: 8px 10px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-family: 'Cormorant Garamond', serif;
-    background-color: #f8f9f9;
-    line-height: 1.1;
-    margin: 0;
-  ">
-  </select>
-</div>
+  <!-- Restaurant Filter Dropdown -->
+  <div id="filter-container" style="display: none; margin-top: 0; margin-bottom: 0;">
+    <select id="restaurant-filters" class="dropdown" onchange="triggerFilteredSearch()" style="
+      font-size: 14px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-family: 'Cormorant Garamond', serif;
+      background-color: #f8f9f9;
+      line-height: 1.1;
+      margin: 0;
+    ">
+    </select>
+  </div>
 
+</div>
+    
 <div id="results"></div>
   </div>
   <script src="script.js"></script>
