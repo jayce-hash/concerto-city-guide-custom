@@ -61,8 +61,18 @@
 </div>
 
     <!-- Dropdown Filter (centered and spaced like buttons) -->
-<div style="display: none; justify-content: center; margin-top: 8px; margin-bottom: 10px;" id="filter-container">
-  <select id="restaurant-filters" class="dropdown" onchange="triggerFilteredSearch()"></select>
+<div id="filter-container" style="display: none; justify-content: center; margin-top: 8px; margin-bottom: 10px;">
+  <select id="restaurant-filters" class="dropdown" onchange="triggerFilteredSearch()" style="
+    font-size: 14px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-family: 'Cormorant Garamond', serif;
+    background-color: #f8f9f9;
+    line-height: 1.1;
+    margin: 0;
+  ">
+  </select>
 </div>
 
 <div id="results"></div>
