@@ -60,8 +60,12 @@
   </div>
 </div>
 
-    <select id="restaurant-filters" class="dropdown" style="display:none;" onchange="triggerFilteredSearch()"></select>
-    <div id="results"></div>
+    <!-- Dropdown Filter (centered and spaced like buttons) -->
+<div style="display: none; justify-content: center; margin-top: 24px; margin-bottom: 24px;" id="filter-container">
+  <select id="restaurant-filters" class="dropdown" onchange="triggerFilteredSearch()"></select>
+</div>
+
+<div id="results"></div>
   </div>
   <script src="script.js"></script>
 </body>
