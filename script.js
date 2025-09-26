@@ -40,16 +40,13 @@ function showRestaurantFilters() {
 
 function loadCategory(type) {
   const filterBox = document.getElementById('restaurant-filters');
-  const filterContainer = document.getElementById('filter-container');
 
   if (type === 'restaurant') {
     filterBox.style.display = 'block';
-    filterContainer.style.display = 'flex'; // Show spacing wrapper
     showRestaurantFilters();
     triggerFilteredSearch();
   } else {
     filterBox.style.display = 'none';
-    filterContainer.style.display = 'none'; // Hide spacing wrapper
     getPlaces({ type: type });
   }
 }
