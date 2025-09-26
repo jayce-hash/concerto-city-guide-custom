@@ -39,8 +39,17 @@ function showRestaurantFilters() {
 }
 
 function loadCategory(type) {
-  const filterBox = document.getElementById('restaurant-filters');
-  filterBox.style.display = type === 'restaurant' ? 'block' : 'none';
+const filterContainer = document.getElementById('filter-container');
+if (type === 'restaurant') {
+  filterBox.style.display = 'block';
+  filterContainer.style.display = 'flex'; // Show the outer container for spacing
+  showRestaurantFilters();
+  triggerFilteredSearch();
+} else {
+  filterBox.style.display = 'none';
+  filterContainer.style.display = 'none'; // Hide the outer container
+  getPlaces({ type: type });
+}
   if (type === 'restaurant') {
     showRestaurantFilters();
     triggerFilteredSearch();
